@@ -57,3 +57,15 @@ end
 group :test do
   gem "berkshelf-api", git: "https://github.com/berkshelf/berkshelf-api.git", ref: "9fb3d95779c4ff72b0074072105caaf70b978bf0"
 end
+
+gem 'faraday-http-cache',
+    git: 'https://github.com/mes/faraday-http-cache.git',
+    branch: 'update-faraday'
+
+gem 'octokit',
+    git: 'https://github.com/mes/octokit.rb.git',
+    branch: 'update-faraday'
+
+gem 'ridley',
+    git: 'https://github.com/mes/ridley.git',
+    branch: 'update-faraday'
