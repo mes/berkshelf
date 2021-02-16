@@ -18,6 +18,16 @@ GIT
       varia_model (~> 0.4)
 
 GIT
+  remote: https://github.com/mes/berkshelf-api-client.git
+  revision: 9cb8bc662436973547b178d660a275046c0f3354
+  branch: update-faraday
+  specs:
+    berkshelf-api-client (3.0.0)
+      faraday (~> 1.0)
+      httpclient (~> 2.7)
+      ridley (>= 4.5, < 6.0)
+
+GIT
   remote: https://github.com/mes/faraday-http-cache.git
   revision: e3bca4e3274b87ad826320339299498b44919110
   branch: update-faraday
@@ -77,15 +87,18 @@ PATH
   specs:
     berkshelf (5.5.0)
       addressable (~> 2.3, >= 2.3.4)
-      berkshelf-api-client (~> 4.0.1)
+      berkshelf-api-client (>= 2.0.2, < 4.0)
       buff-config (~> 2.0)
       buff-extensions (~> 2.0)
       buff-shell_out (~> 1.0)
       cleanroom (~> 1.0)
+      faraday (~> 1.0)
       httpclient (~> 2.7)
       minitar (~> 0.5, >= 0.5.4)
       mixlib-archive (~> 0.1)
+      octokit (~> 4.0)
       retryable (~> 2.0)
+      ridley (~> 5.0)
       solve (> 2.0, < 4.0)
       thor (~> 0.19, < 0.19.2)
 
@@ -114,8 +127,6 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    berkshelf-api-client (4.0.1)
-      chef (>= 12.0)
     buff-config (2.0.0)
       buff-extensions (~> 2.0)
       varia_model (~> 0.6)
@@ -130,35 +141,6 @@ GEM
     celluloid-io (0.16.2)
       celluloid (>= 0.16.0)
       nio4r (>= 1.1.0)
-    chef (12.22.5)
-      addressable
-      bundler (>= 1.10)
-      chef-config (= 12.22.5)
-      chef-zero (>= 4.8, < 13)
-      diff-lcs (~> 1.2, >= 1.2.4)
-      erubis (~> 2.7)
-      ffi-yajl (~> 2.2)
-      highline (~> 1.6, >= 1.6.9)
-      iniparse (~> 1.4)
-      mixlib-archive (~> 0.4)
-      mixlib-authentication (~> 1.4)
-      mixlib-cli (~> 1.7)
-      mixlib-log (~> 1.3)
-      mixlib-shellout (~> 2.0)
-      net-sftp (~> 2.1, >= 2.1.2)
-      net-ssh (>= 2.9, < 5.0)
-      net-ssh-multi (~> 1.2, >= 1.2.1)
-      ohai (>= 8.6.0.alpha.1, < 13)
-      plist (~> 3.2)
-      proxifier (~> 1.0)
-      rspec-core (~> 3.5)
-      rspec-expectations (~> 3.5)
-      rspec-mocks (~> 3.5)
-      rspec_junit_formatter (~> 0.2.0)
-      serverspec (~> 2.7)
-      specinfra (~> 2.10)
-      syslog-logger (~> 1.6)
-      uuidtools (~> 2.1.5)
     chef-config (12.22.5)
       addressable
       fuzzyurl
@@ -255,7 +237,6 @@ GEM
       spork (>= 0.8.4)
     hashdiff (0.3.2)
     hashie (3.4.6)
-    highline (1.7.10)
     hitimes (1.2.4)
     http (2.1.0)
       addressable (~> 2.3)
@@ -269,8 +250,6 @@ GEM
     httpclient (2.8.3)
     i18n (0.7.0)
     ice_nine (0.11.2)
-    iniparse (1.5.0)
-    ipaddress (0.8.3)
     json (1.8.6)
     libnotify (0.8.4)
       ffi (>= 1.0.11)
@@ -286,7 +265,6 @@ GEM
     mixlib-archive (0.4.20)
       mixlib-log
     mixlib-authentication (1.4.2)
-    mixlib-cli (1.7.0)
     mixlib-config (2.2.18)
       tomlrb
     mixlib-install (2.1.9)
@@ -310,33 +288,13 @@ GEM
     nenv (0.3.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-sftp (2.1.2)
-      net-ssh (>= 2.6.5)
     net-ssh (4.0.1)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    net-ssh-multi (1.2.1)
-      net-ssh (>= 2.6.5)
-      net-ssh-gateway (>= 1.2.0)
-    net-telnet (0.1.1)
     nio4r (2.0.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
-    ohai (8.26.1)
-      chef-config (>= 12.5.0.alpha.1, < 14)
-      ffi (~> 1.9)
-      ffi-yajl (~> 2.2)
-      ipaddress
-      mixlib-cli
-      mixlib-config (~> 2.0)
-      mixlib-log (>= 1.7.1, < 2.0)
-      mixlib-shellout (~> 2.0)
-      plist (~> 3.1)
-      systemu (~> 2.6.4)
-      wmi-lite (~> 1.0)
-    plist (3.6.0)
-    proxifier (1.0.3)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -367,16 +325,10 @@ GEM
     rspec-expectations (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.5.0)
-    rspec-its (1.3.0)
-      rspec-core (>= 3.0.0)
-      rspec-expectations (>= 3.0.0)
     rspec-mocks (3.5.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
-    rspec_junit_formatter (0.2.3)
-      builder (< 4)
-      rspec-core (>= 2, < 4, != 2.12.0)
     ruby-progressbar (1.8.1)
     ruby2_keywords (0.0.4)
     ruby_dep (1.5.0)
@@ -385,25 +337,12 @@ GEM
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
     semverse (2.0.0)
-    serverspec (2.41.5)
-      multi_json
-      rspec (~> 3.0)
-      rspec-its
-      specinfra (~> 2.72)
-    sfl (2.3)
     shellany (0.0.1)
     slop (3.6.0)
     solve (3.1.1)
       molinillo (>= 0.5)
       semverse (>= 1.1, < 3.0)
-    specinfra (2.82.23)
-      net-scp
-      net-ssh (>= 2.7)
-      net-telnet (= 0.1.1)
-      sfl
     spork (0.9.2)
-    syslog-logger (1.6.8)
-    systemu (2.6.5)
     test-kitchen (1.15.0)
       mixlib-install (>= 1.2, < 3.0)
       mixlib-shellout (>= 1.2, < 3.0)
@@ -440,7 +379,6 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    wmi-lite (1.0.5)
     yard (0.9.8)
 
 PLATFORMS
@@ -451,6 +389,7 @@ DEPENDENCIES
   aruba (>= 0.10.0)
   berkshelf!
   berkshelf-api!
+  berkshelf-api-client!
   chef-zero (>= 4.0)
   coolline
   dep_selector (>= 1.0)
